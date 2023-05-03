@@ -4,3 +4,10 @@
 
 ## Sommaire
 
+### Liens
+
+___
+
+- [HDFS](https://www.lebigdata.fr/hdfs-fonctionnement-avantages)
+
+___
