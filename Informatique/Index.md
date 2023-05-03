@@ -6,7 +6,8 @@
 
 ---
 
-- HDFS
-- 
+- Hadoop
+- Spark
+- Kafka
 
 ---
