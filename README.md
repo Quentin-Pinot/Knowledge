@@ -1,3 +1,3 @@
 # Menu
 
-[Informatique](/Informatique/Index.md)
+## [Informatique](/Informatique/Index.md)
