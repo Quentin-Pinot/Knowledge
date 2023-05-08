@@ -1,3 +1,26 @@
+# Stocker des données
+
+## SQL
+
+---
+
+- Base de données Relationnelles (RDBMS) :
+  
+  - MySQL
+  - PostgreSQL
+
+---
+
+## NoSQL
+
+---
+
+- Data Lake
+
+---
+
+
+
 # Framework
 
 ## Apache
