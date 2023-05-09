@@ -24,8 +24,3 @@ Afin de pouvoir passer à l'échelle, le stockage se fera de manière distribué
 La volumétrie des données n'implique pas forcément le besoin d'offrir une vitesse d'écriture élevée.
 
 Un Système de fichiers distribué stocke ses données sur plusieurs machines. Théoriquement il suffirait d'ajouter une machine pour adapter à l'échelle.
-
-
-
-
-
