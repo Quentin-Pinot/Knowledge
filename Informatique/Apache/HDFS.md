@@ -41,11 +41,27 @@ HDFS est programmé en Java.
 ### Via une [VM Ubuntu Server](https://hibbard.eu/install-ubuntu-virtual-box/)
 
 1. Installer JAVA 
-   1. JRE ```shell sudo apt-get install default-jre```
-   2. Ecrire l'output de la commande ```bash readlink -f /usr/bin/java``` dans le fichier **~/.bashrc** en remplacant le terme readlink dans ```zsh export JAVA_HOME=readlink && export PATH=$PATH:JAVA_HOME/bin```
+   1. JRE 
+    ```shell
+    sudo apt-get install default-jre
+    ```
+   2. Ecrire l'output de la commande bash
+    ```shell
+    readlink -f /usr/bin/java
+    ```
+    dans le fichier **~/.bashrc** en remplacant le terme readlink
+    ```shell
+    export JAVA_HOME=readlink && export PATH=$PATH:JAVA_HOME/bin
+    ```
 2. Installer HDFS
-   1. ```console wget link_dl``` des [binaires d'Hadoop](https://hadoop.apache.org/releases.html) de la version qui nous interesse et les extraires avec ```console xzf fichier_compresse```
-   2. 
+   1. Récupérer les [binaires d'Hadoop](https://hadoop.apache.org/releases.html) de la version qui nous interesse
+    ```shell 
+    wget link_dl
+    ```
+   2. Extraire les fichiers compressé
+    ```shell 
+    xzf fichier_compresse
+    ```
 
 
 
