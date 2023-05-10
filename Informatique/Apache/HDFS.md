@@ -66,60 +66,60 @@ HDFS est programmé en Java.
 
 #### Configuration
 
-   1. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/core-site.xml** :
-    ```xml
-    <property>
-        <name>fs.defaultFS</name>
-        <value>hdfs://localhost:9000</value>
-    </property>
-    ```
-   2. Créer les dossiers NameNode **~/hdfs/namenode** et DataNode **~/hdfs/datanode**
-   3. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/hdfs-site.xml** :
-    ```xml
-    <property>
-        <name>dfs.name.dir</name>
-        <value>/home/user/code/hdfs/namenode/</value>
-    </property>
-    <property>
-        <name>dfs.data.dir</name>
-        <value>/home/user/code/hdfs/datanode/</value>
-    </property>
-    ```
-   4. Formater le NameNode
-    ```shell
-    ./hadoop_version/bin/hdfs namenode -format
-    ```
-   5. Lancement de notre NameNode
-    ```sh
-    ./hadoop_version/bin/hdfs namenode
-    ```
-   6. Lancement de notre NameNode
-    ```shell
-    ./hadoop_version/bin/hdfs namenode
-    ```
-   7. Lancement de notre DataNode
-    ```shell
-    ./hadoop_version/bin/hdfs datanode
-    ```
+1. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/core-site.xml** :
+ ```xml
+ <property>
+     <name>fs.defaultFS</name>
+     <value>hdfs://localhost:9000</value>
+ </property>
+ ```
+2. Créer les dossiers NameNode **~/hdfs/namenode** et DataNode **~/hdfs/datanode**
+3. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/hdfs-site.xml** :
+ ```xml
+ <property>
+     <name>dfs.name.dir</name>
+     <value>/home/user/code/hdfs/namenode/</value>
+ </property>
+ <property>
+     <name>dfs.data.dir</name>
+     <value>/home/user/code/hdfs/datanode/</value>
+ </property>
+ ```
+4. Formater le NameNode
+ ```shell
+ ./hadoop_version/bin/hdfs namenode -format
+ ```
+5. Lancement de notre NameNode
+ ```sh
+ ./hadoop_version/bin/hdfs namenode
+ ```
+6. Lancement de notre NameNode
+ ```shell
+ ./hadoop_version/bin/hdfs namenode
+ ```
+7. Lancement de notre DataNode
+ ```shell
+ ./hadoop_version/bin/hdfs datanode
+ ```
 
 #### Commniquer avec Python
 
-    1. Installer `pip install hdfs`
-    2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
-    ```python
-    import hdfs
+1. Installer `pip install hdfs`
+2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
+```python
+import hdfs
 
-    client = hdfs.InsecureClient("http://0.0.0.0:9870")
-    ```
-    3. Afficher le contenu à la racine
-    ```python
-    client.list('/')
-    ```
-    4. Ecrire un fichier txt avec le contenu au format binaire
-    ```python
-    client.list('/')
-    ```
-    5. Lire un fichier
+client = hdfs.InsecureClient("http://0.0.0.0:9870")
+```
+3. Afficher le contenu à la racine
+```python
+client.list('/')
+```
+4. Ecrire un fichier txt avec le contenu au format binaire
+```python
+client.list('/')
+```
+5. Lire un fichier
 
 ### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
 
