@@ -105,7 +105,7 @@ HDFS est programmé en Java.
 #### Commniquer avec Python
 
 1. Installer le package HDFS
-```console
+```shell
 pip install hdfs
 ```
 2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
@@ -125,4 +125,3 @@ client.list('/')
 5. Lire un fichier
 
 ### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
-
