@@ -105,7 +105,7 @@ HDFS est programmé en Java.
 #### Commniquer avec Python
 
 1. Installer le package HDFS
-```shell
+```bash
 pip install hdfs
 ```
 2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
