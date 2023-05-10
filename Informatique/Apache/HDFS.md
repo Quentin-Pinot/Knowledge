@@ -90,7 +90,7 @@ HDFS est programmé en Java.
     ./hadoop_version/bin/hdfs namenode -format
     ```
    5. Lancement de notre NameNode
-    ```shell
+    ```sh
     ./hadoop_version/bin/hdfs namenode
     ```
    6. Lancement de notre NameNode
