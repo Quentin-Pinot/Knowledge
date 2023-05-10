@@ -41,7 +41,7 @@ HDFS est programmé en Java.
 #### Installer JAVA 
 
    1. JRE 
-    ```shell
+    ```console
     sudo apt-get install default-jre
     ```
    2. Ecrire l'output de la commande bash sans le **/bin/java**
