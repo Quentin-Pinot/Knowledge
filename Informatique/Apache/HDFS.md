@@ -40,20 +40,20 @@ HDFS est programmé en Java.
 
 ### Via une [VM Ubuntu Server](https://hibbard.eu/install-ubuntu-virtual-box/)
 
-1. Installer JAVA 
+#### Installer JAVA 
    1. JRE 
     ```shell
     sudo apt-get install default-jre
     ```
-   2. Ecrire l'output de la commande bash
+   2. Ecrire l'output de la commande bash sans le **/bin/java**
     ```shell
     readlink -f /usr/bin/java
     ```
     dans le fichier **~/.bashrc** en remplacant le terme readlink
     ```shell
-    export JAVA_HOME=readlink && export PATH=$PATH:JAVA_HOME/bin
+    export JAVA_HOME=readlink && export PATH=$PATH:JAVA_HOME
     ```
-2. Installer HDFS
+#### Installer HDFS
    1. Récupérer les [binaires d'Hadoop](https://hadoop.apache.org/releases.html) de la version qui nous interesse
     ```shell 
     wget link_dl
@@ -62,8 +62,39 @@ HDFS est programmé en Java.
     ```shell 
     xzf fichier_compresse
     ```
+#### Configuration
+   1. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/core-site.xml** :
+    ```xml
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+    ```
+   2. Créer les dossiers NameNode **~/hdfs/namenode** et DataNode **~/hdfs/datanode**
+   3. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/hdfs-site.xml** :
+    ```xml
+    <property>
+        <name>dfs.name.dir</name>
+        <value>/home/user/code/hdfs/namenode/</value>
+    </property>
+    <property>
+        <name>dfs.data.dir</name>
+        <value>/home/user/code/hdfs/datanode/</value>
+    </property>
+    ```
+   4. Formater le NameNode
+    ```shell
+    ./hadoop_version/bin/hdfs namenode -format
+    ```
+   5. Lancement de notre NameNode
+    ```shell
+    ./hadoop_version/bin/hdfs namenode
+    ```
+   6. Lancement de notre NameNode
+    ```shell
+    ./hadoop_version/bin/hdfs namenode
+    ```
 
 
-
-### Via un [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
+### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
 
