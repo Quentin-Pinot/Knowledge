@@ -104,22 +104,22 @@ HDFS est programmé en Java.
 
 #### Commniquer avec Python
 
-1. Installer `pip install hdfs`
-2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
-```python
-import hdfs
+    1. Installer `pip install hdfs`
+    2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
+    ```python
+    import hdfs
 
-client = hdfs.InsecureClient("http://0.0.0.0:9870")
-```
-3. Afficher le contenu à la racine
-```python
-client.list('/')
-```
-4. Ecrire un fichier txt avec le contenu au format binaire
-```python
-client.list('/')
-```
-5. Lire un fichier
+    client = hdfs.InsecureClient("http://0.0.0.0:9870")
+    ```
+    3. Afficher le contenu à la racine
+    ```python
+    client.list('/')
+    ```
+    4. Ecrire un fichier txt avec le contenu au format binaire
+    ```python
+    client.list('/')
+    ```
+    5. Lire un fichier
 
 ### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
 
