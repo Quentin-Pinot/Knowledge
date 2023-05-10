@@ -1,5 +1,3 @@
-![Apache HDFS logo](https://upload.wikimedia.org/wikipedia/commons/3/38/Hadoop_logo_new.svg)
-
 <h1 align="center">Apache HDFS</h1>
 
 # Présentation
@@ -41,6 +39,7 @@ HDFS est programmé en Java.
 ### Via une [VM Ubuntu Server](https://hibbard.eu/install-ubuntu-virtual-box/)
 
 #### Installer JAVA 
+
    1. JRE 
     ```shell
     sudo apt-get install default-jre
@@ -53,7 +52,9 @@ HDFS est programmé en Java.
     ```shell
     export JAVA_HOME=readlink && export PATH=$PATH:JAVA_HOME
     ```
+
 #### Installer HDFS
+
    1. Récupérer les [binaires d'Hadoop](https://hadoop.apache.org/releases.html) de la version qui nous interesse
     ```shell 
     wget link_dl
@@ -62,7 +63,9 @@ HDFS est programmé en Java.
     ```shell 
     xzf fichier_compresse
     ```
+
 #### Configuration
+
    1. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/core-site.xml** :
     ```xml
     <property>
@@ -94,7 +97,33 @@ HDFS est programmé en Java.
     ```shell
     ./hadoop_version/bin/hdfs namenode
     ```
+   7. Lancement de notre DataNode
+    ```shell
+    ./hadoop_version/bin/hdfs datanode
+    ```
 
+#### Commniquer avec Python
+
+1. Installer `pip install hdfs`
+2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
+ ```python
+ import hdfs
+
+ client = hdfs.InsecureClient("http://0.0.0.0:9870")
+ ```
+3. Afficher le contenu à la racine
+```python
+client.list('/')
+```
+4. Ecrire un fichier txt avec le contenu au format binaire
+```python
+client.list('/')
+```
+5. Lire un fichier
+
+```python
+print('test')
+```
 
 ### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
 
