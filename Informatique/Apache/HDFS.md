@@ -106,11 +106,11 @@ HDFS est programmé en Java.
 
 1. Installer `pip install hdfs`
 2. Connection au web-server HDFS (Dans les logs à Stating Web-server for hdfs at: ...)
- ```python
- import hdfs
+```python
+import hdfs
 
- client = hdfs.InsecureClient("http://0.0.0.0:9870")
- ```
+client = hdfs.InsecureClient("http://0.0.0.0:9870")
+```
 3. Afficher le contenu à la racine
 ```python
 client.list('/')
@@ -120,10 +120,6 @@ client.list('/')
 client.list('/')
 ```
 5. Lire un fichier
-
-```python
-print('test')
-```
 
 ### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
 
