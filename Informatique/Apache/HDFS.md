@@ -38,6 +38,14 @@ HDFS est programmé en Java.
 
 ### Via une [VM Ubuntu Server](https://hibbard.eu/install-ubuntu-virtual-box/)
 
+#### Créer des VMs - Ubuntu Server
+
+Les VMs que je vais utiliser pour la partie d'HDFS ont été déployé par rapport à cette documentation d'[Oracle VM Virtual Box](/Informatique/Oracle/Oracle_VM_Virtual_Machine.md) qui sont des Ubuntu Servers. **Attention on doit garder le même nom d'utilisateur pour tous les workers d'HDFS**
+
+Nous allons créer une VM par **NameNode** et par **DataNode**.
+
+
+
 #### Installer JAVA 
 
 1. JRE 
@@ -48,9 +56,10 @@ sudo apt-get install default-jre
 ```shell
 readlink -f /usr/bin/java
 ```
-dans le fichier **~/.bashrc** en remplacant le terme readlink
-```bash
-export JAVA_HOME=readlink && export PATH=$PATH:JAVA_HOME
+dans le fichier **~/.bashrc** en remplacant le terme readlink et lancer à nouveau la 1ere ligne en commande linux
+```shell
+export JAVA_HOME=readlink 
+export PATH=$JAVA_HOME/bin:$PATH
 ```
 
 #### Installer HDFS
@@ -61,7 +70,7 @@ wget link_dl
 ```
 2. Extraire les fichiers compressé
 ```shell 
-xzf fichier_compresse
+tar xzf fichier_compresse
 ```
 
 #### Configuration
@@ -70,37 +79,55 @@ xzf fichier_compresse
 ```xml
 <property>
     <name>fs.defaultFS</name>
-    <value>hdfs://localhost:9000</value>
+    <value>hdfs://@ip_namenode:9000</value>
 </property>
 ```
 2. Créer les dossiers NameNode **~/hdfs/namenode** et DataNode **~/hdfs/datanode**
-3. Ajouter dans la partie configuration du fichier **~/hadoop_version/etc/hadoop/hdfs-site.xml** :
+3. Modifier les fichiers suivant du dossier d'installation **~/hadoop_version**
+   1. **etc/hadoop/hdfs-site.xml** :
 ```xml
 <property>
     <name>dfs.name.dir</name>
     <value>/home/user/code/hdfs/namenode/</value>
 </property>
+<!--This section isn't mandatory and not really recommended because distributed means to not put a datanode with the namenode-->
 <property>
     <name>dfs.data.dir</name>
     <value>/home/user/code/hdfs/datanode/</value>
 </property>
+<property>
+    <!--The default replication is set to 3-->
+    <name>dfs.replication</name>
+    <value>3</value>
+</property>
 ```
-4. Formater le NameNode
+   2. Uniquement pour le **Namenode** : **etc/hadoop/workers**
+```xml
+@ip_node1
+@ip_node2
+@ip_nodex
+...
+```
+   3. 
+1. Formater le NameNode
 ```shell
 ./hadoop_version/bin/hdfs namenode -format
 ```
-5. Lancement de notre NameNode
+1. Lancement de notre NameNode
 ```sh
 ./hadoop_version/bin/hdfs namenode
 ```
-6. Lancement de notre NameNode
+1. Lancement de notre NameNode
 ```shell
 ./hadoop_version/bin/hdfs namenode
 ```
-7. Lancement de notre DataNode
+1. Lancement de notre DataNode
 ```shell
 ./hadoop_version/bin/hdfs datanode
 ```
+1. ssh-keygen -t rsa -P '' 
+2. ssh-copy-id -i ~/.ssh/id_rsa.pub namenode@IP_Adress_autre_node
+
 
 #### Commniquer avec Python
 
@@ -120,8 +147,13 @@ client.list('/')
 ```
 4. Ecrire un fichier txt avec le contenu au format binaire
 ```python
-client.list('/')
+with client.write("/test.txt") as f:
+    f.write(b"hello world !")
 ```
 5. Lire un fichier
+```python
+with client.read("/test.txt") as f:
+    print(f.read())
+```
 
 ### Via [Docker Compose](https://towardsdatascience.com/hdfs-simple-docker-installation-guide-for-data-science-workflow-b3ca764fc94b)
