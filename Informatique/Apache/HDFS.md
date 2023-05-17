@@ -161,6 +161,13 @@ bin/hdfs namenode -format
 sbin/start-dfs.sh
 ``` 
 
+##### Fichiers NameNode
+
+1. edits_inprogress_XXX... : ensemble de transactions correspondant à un segment entre 2 checkpoints
+2. fsimage_XXX... : image du NameNode
+
+Le fichier **inprogress** est mergé au fichier fsimage afin de restorer le **NameNode** et on appelle cela un **Checkpoint**. Sa taille peut-être importante si le **NameNode** n'est pas redémarré.
+
 #### Configurer une autre DataNode
 
 1. Exemple de fichier config pourne une DataNode plus spécifique **etc/hadoop/hdfs-site.xml** :
@@ -189,12 +196,14 @@ sbin/start-dfs.sh
     </property>
 </configuration>
 ```
+[IPC](https://cwiki.apache.org/confluence/display/HADOOP2/ipc) : InterProcess Communication
+
 2. Ajouter les mêmes étapes que précédement
 3. Sur le **NameNode** nous devons rafraichir sa connaissance de ses **DataNode**
 ```shell
 bin/hdfs dfsadmin -refreshNodes
 ```
-4. Pour lancer la **DataNode** sur sa machine lancer la commande (**&**: pour ne pas bloquer le terminal). On peut même spécifier un fichier en particulier de configuration sinon il se bassera sur **etc/hadoop/hdfs-site.xml**
+4. Pour lancer la **DataNode** sur sa machine lancer la commande (**&**: pour ne pas bloquer le terminal). On peut même spécifier un fichier en particulier de configuration  après le paramètre **-conf** sinon il se bassera sur **etc/hadoop/hdfs-site.xml**
 ```shell
 bin/hdfs datanode -conf &
 ```
@@ -202,12 +211,50 @@ bin/hdfs datanode -conf &
 ```shell
 bin/hdfs fsck /file -files -blocks -locations
 ```
-6. 
+
+#### Namenode secondaire
+
+A pour but de diminier le risque de défaillance lié au **NameNode** en sauvegardant ses données et de garantir son rapide redémarrage. Le **Namenode secondaire** va effectuer périodiquement des **Checkpoint**.
+
+Lancer le **Namenode secondare**
+```shell
+bin/hdfs secondarynamenode
+```
+
+Les checkpoints s'effectuent tous les heures mais sont personnalisables avec le paramètre **dfs.namenode.checkpoint.period**. Toutes les 10⁶ transactions des checkpoints sont effectués mais c'est modifiable par le paramètre **dfs.namenode.checkpoint.txns**.
+
+Forcer la création du checkpoint
+```shell
+bin/hdfs secondarynamenode -checkpoint force
+```
 
 
-[IPC](https://cwiki.apache.org/confluence/display/HADOOP2/ipc) : InterProcess Communication
+#### Snapshot des données
 
-#### Commniquer avec Python
+Sauvegarde à un instant donné l'état d'unn répertoire snapshotable.
+
+Il faut rendre snapshotable le répertoire qu'on veut sauvegarder
+```shell
+bin/hdfs dfsadmin -allowSnapshot /dir_snapshotable
+```
+
+Créer un spnashot que l'on peut retrouver dans le répertoire **/dir_snapshotable/.snapshot/nom_snapshot**. Si on ne précise pas son nom alors son nom comprendra la date du snapshot.
+```shell
+bin/hdfs dfs -createSnapshot /dir_snapshotable nom_snapshot
+```
+
+Visualiser les différences entre les données et un snapshot
+```shell
+bin/hdfs snapshotDiif /dir_snapshotable nom_snapshot
+```
+
+Pour restaurer un snapshot il suffit de le copier dans le répertoire snapshotable
+```shell
+bin/hdfs dfs -cp -f /dir_snapshotable/.snapshot/nom_snapshot/* /dir_snapshotable/
+```
+
+
+# Commniquer avec Python
 
 Il est important de le faire à partir d'un ordinateur qui a sa clé ssh public dans le fichier authorized_host de la machine du namenode.
 
