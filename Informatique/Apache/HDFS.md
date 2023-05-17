@@ -194,7 +194,7 @@ sbin/start-dfs.sh
 ```shell
 bin/hdfs dfsadmin -refreshNodes
 ```
-4. Pour lancer la **DataNode** sur sa machine lancer la commande (**&** : pour ne pas bloquer le terminal). On peut même spécifier un fichier en particulier de configuration sinon il se bassera sur **etc/hadoop/hdfs-site.xml**
+4. Pour lancer la **DataNode** sur sa machine lancer la commande (**&**: pour ne pas bloquer le terminal). On peut même spécifier un fichier en particulier de configuration sinon il se bassera sur **etc/hadoop/hdfs-site.xml**
 ```shell
 bin/hdfs datanode -conf &
 ```
